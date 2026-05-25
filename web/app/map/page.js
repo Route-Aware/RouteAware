@@ -1,6 +1,7 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
+import { Suspense } from 'react';
 
 const API_BASE = 'https://routeaware-api.onrender.com';
 
@@ -38,7 +39,6 @@ const STYLES = {
     width: '100vw',
     height: '100vh',
   },
-  // Shifted right to clear the sidebar icons
   routeInfoPanel: {
     position: 'absolute',
     top: 20,
@@ -109,7 +109,6 @@ const STYLES = {
     textAlign: 'center',
     padding: 16,
   },
-  // Map drawing constants
   polyline: {
     strokeOpacity: 0.9,
     strokeWeight: 6,
@@ -214,9 +213,9 @@ async function fetchRoadCoords(startCoord, endCoord) {
 }
 
 // ============================================================
-// COMPONENT
+// COMPONENT (RENAMED from Map to MapComponent)
 // ============================================================
-export default function Map() {
+function MapComponent() {
   const mapRef = useRef(null);
   const searchParams = useSearchParams();
   const from = searchParams.get('from');
@@ -274,7 +273,6 @@ export default function Map() {
         styles: [{ featureType: 'poi', elementType: 'labels', stylers: [{ visibility: 'off' }] }],
       });
 
-      // FIX: Properly initialize Street View to prevent black screen
       const streetView = map.getStreetView();
       streetView.setOptions({
         disableDefaultUI: false,
@@ -283,7 +281,6 @@ export default function Map() {
         zoom: 1,
       });
 
-      // Refresh map when closing Street View to prevent black screen
       window.google.maps.event.addListener(streetView, 'visible_changed', function() {
         if (!streetView.getVisible()) {
           setTimeout(() => {
@@ -436,5 +433,16 @@ export default function Map() {
         </div>
       )}
     </>
+  );
+}
+
+// ============================================================
+// EXPORT — with Suspense boundary for useSearchParams
+// ============================================================
+export default function Page() {
+  return (
+    <Suspense fallback={<div style={STYLES.loadingScreen}>Loading map...</div>}>
+      <MapComponent />
+    </Suspense>
   );
 }
