@@ -1,3 +1,4 @@
+```js
 'use client';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
@@ -32,7 +33,7 @@ export default function Login() {
       email,
       password,
       options: {
-        emailRedirectTo: `${window.location.origin}/dashboard`,
+        emailRedirectTo: `https://project-ilsfa.vercel.app/dashboard`,
         data: { name, full_name: name }
       }
     });
@@ -167,3 +168,4 @@ export default function Login() {
     </main>
   );
 }
+```
