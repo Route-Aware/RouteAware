@@ -108,7 +108,7 @@ export default function Login() {
       {/* Real map tile background */}
       <div style={{
         position: 'absolute', inset: 0,
-        backgroundImage: `url("https://tile.openstreetmap.org/6/42/26.png")`,
+        backgroundImage: `url("https://tile.openstreetmap.org/3/42/26.png")`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         opacity: 0.18,
