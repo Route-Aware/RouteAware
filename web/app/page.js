@@ -40,50 +40,47 @@ export default function Home() {
 
         {/* Title */}
         <h1 style={{
-          fontSize: 64, fontWeight: 800, marginBottom: 0, lineHeight: 1.1,
+          fontSize: 64,
+          fontWeight: 800,
+          marginBottom: 0,
+          lineHeight: 1.1,
           background: 'linear-gradient(135deg, #fff 0%, #38bdf8 50%, #14b8a6 100%)',
-          WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent'
+          WebkitBackgroundClip: 'text',
+          WebkitTextFillColor: 'transparent'
         }}>
           RouteAware
         </h1>
 
-        {/* Get started link */}
-        <Link href="/login" style={{
-          display: 'inline-block',
-          marginTop: 16, marginBottom: 24,
-          fontSize: 16, fontWeight: 600,
-          color: '#38bdf8',
-          textDecoration: 'underline',
-          textDecorationColor: 'rgba(56,189,248,0.4)',
-          textUnderlineOffset: 4,
-          letterSpacing: 0.5
-        }}>
+        {/* Get started link (kept as single CTA) */}
+        <Link
+          href="/login"
+          style={{
+            display: 'inline-block',
+            marginTop: 16,
+            marginBottom: 24,
+            fontSize: 16,
+            fontWeight: 600,
+            color: '#38bdf8',
+            textDecoration: 'underline',
+            textDecorationColor: 'rgba(56,189,248,0.4)',
+            textUnderlineOffset: 4,
+            letterSpacing: 0.5
+          }}
+        >
           Get started →
         </Link>
 
         {/* Subtitle */}
-        <p style={{ fontSize: 18, color: '#64748b', marginBottom: 48, maxWidth: 480, margin: '0 auto 48px' }}>
+        <p style={{
+          fontSize: 18,
+          color: '#64748b',
+          marginBottom: 48,
+          maxWidth: 480,
+          margin: '0 auto'
+        }}>
           Real-time road safety intelligence for Northern Pakistan
         </p>
 
-        {/* Buttons */}
-        <div style={{ display: 'flex', gap: 16, justifyContent: 'center', flexWrap: 'wrap' }}>
-          <Link href="/login" style={{
-            background: 'linear-gradient(135deg, #0ea5e9, #14b8a6)',
-            color: 'white', padding: '14px 32px', borderRadius: 40,
-            textDecoration: 'none', fontWeight: 600, fontSize: 16
-          }}>
-            Sign In
-          </Link>
-          <Link href="/map" style={{
-            background: 'rgba(255,255,255,0.05)',
-            border: '1px solid rgba(56,189,248,0.2)',
-            color: 'white', padding: '14px 32px', borderRadius: 40,
-            textDecoration: 'none', fontWeight: 600, fontSize: 16
-          }}>
-            View Map
-          </Link>
-        </div>
       </div>
     </main>
   );
