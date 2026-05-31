@@ -112,7 +112,7 @@ export default function Login() {
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         opacity: 0.50,
-        filter: 'invert(1) hue-rotate(180deg) saturate(2) brightness(0.5)',
+        //filter: 'invert(1) hue-rotate(180deg) saturate(2) brightness(0.5)',
         pointerEvents: 'none',
         transform: 'scale(1.05)'
       }} />
