@@ -93,47 +93,10 @@ export default function Login() {
     setLoading(false);
   };
 
-  const mapBackground = `
-    <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
-      <defs>
-        <radialGradient id="glow" cx="50%" cy="50%" r="50%">
-          <stop offset="0%" stop-color="#1e40af" stop-opacity="0.3"/>
-          <stop offset="100%" stop-color="#0f172a" stop-opacity="0"/>
-        </radialGradient>
-      </defs>
-      <!-- Grid lines -->
-      ${Array.from({length: 20}, (_, i) => `<line x1="${i * 80}" y1="0" x2="${i * 80}" y2="100%" stroke="#1e3a5f" stroke-width="0.5" opacity="0.4"/>`).join('')}
-      ${Array.from({length: 15}, (_, i) => `<line x1="0" y1="${i * 80}" x2="100%" y2="${i * 80}" stroke="#1e3a5f" stroke-width="0.5" opacity="0.4"/>`).join('')}
-      <!-- Routes -->
-      <path d="M 0 300 Q 200 250 400 320 T 800 280 T 1200 300 T 1600 260" stroke="#38bdf8" stroke-width="1.5" fill="none" opacity="0.5"/>
-      <path d="M 0 500 Q 300 420 600 480 T 1000 440 T 1400 460 T 1600 420" stroke="#22d3ee" stroke-width="1" fill="none" opacity="0.35"/>
-      <path d="M 100 0 Q 150 200 200 400 T 300 700 T 250 900" stroke="#38bdf8" stroke-width="1" fill="none" opacity="0.3"/>
-      <path d="M 500 0 Q 520 150 480 350 T 550 600 T 500 900" stroke="#22d3ee" stroke-width="1" fill="none" opacity="0.3"/>
-      <path d="M 900 0 Q 950 200 880 400 T 920 700" stroke="#38bdf8" stroke-width="1" fill="none" opacity="0.25"/>
-      <path d="M 1200 100 Q 1100 300 1150 500 T 1200 800" stroke="#22d3ee" stroke-width="1" fill="none" opacity="0.25"/>
-      <path d="M 0 150 Q 400 180 700 120 T 1200 160 T 1600 140" stroke="#7dd3fc" stroke-width="0.8" fill="none" opacity="0.2"/>
-      <path d="M 0 650 Q 350 600 700 640 T 1100 600 T 1600 620" stroke="#7dd3fc" stroke-width="0.8" fill="none" opacity="0.2"/>
-      <!-- Dots at intersections -->
-      <circle cx="400" cy="320" r="3" fill="#38bdf8" opacity="0.7"/>
-      <circle cx="800" cy="280" r="2" fill="#22d3ee" opacity="0.5"/>
-      <circle cx="200" cy="400" r="3" fill="#38bdf8" opacity="0.6"/>
-      <circle cx="550" cy="480" r="2" fill="#22d3ee" opacity="0.5"/>
-      <circle cx="880" cy="400" r="3" fill="#38bdf8" opacity="0.6"/>
-      <circle cx="1150" cy="500" r="2" fill="#22d3ee" opacity="0.4"/>
-      <circle cx="700" cy="120" r="2" fill="#7dd3fc" opacity="0.5"/>
-      <circle cx="1100" cy="600" r="2" fill="#7dd3fc" opacity="0.4"/>
-      <!-- Glow overlay -->
-      <rect width="100%" height="100%" fill="url(#glow)"/>
-    </svg>
-  `;
-
-  const svgDataUrl = `data:image/svg+xml;base64,${btoa(mapBackground)}`;
-
   return (
     <main style={{
       minHeight: '100vh',
-      background: `linear-gradient(135deg, #020817 0%, #0f172a 40%, #0c1e3d 70%, #020817 100%)`,
-      backgroundImage: `linear-gradient(135deg, #020817 0%, #0f172a 40%, #0c1e3d 70%, #020817 100%)`,
+      background: '#020817',
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
@@ -142,20 +105,29 @@ export default function Login() {
       overflow: 'hidden'
     }}>
 
-      {/* Map background */}
+      {/* Real map tile background */}
       <div style={{
         position: 'absolute', inset: 0,
-        backgroundImage: `url("${svgDataUrl}")`,
+        backgroundImage: `url("https://tile.openstreetmap.org/6/42/26.png")`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
-        opacity: 0.6,
+        opacity: 0.18,
+        filter: 'invert(1) hue-rotate(180deg) saturate(3) brightness(0.5)',
+        pointerEvents: 'none',
+        transform: 'scale(1.05)'
+      }} />
+
+      {/* Dark gradient overlay */}
+      <div style={{
+        position: 'absolute', inset: 0,
+        background: 'linear-gradient(135deg, rgba(2,8,23,0.85) 0%, rgba(12,30,61,0.7) 50%, rgba(2,8,23,0.85) 100%)',
         pointerEvents: 'none'
       }} />
 
-      {/* Gradient overlay */}
+      {/* Blue glow */}
       <div style={{
         position: 'absolute', inset: 0,
-        background: 'radial-gradient(ellipse at center, rgba(14,165,233,0.08) 0%, transparent 70%)',
+        background: 'radial-gradient(ellipse at 50% 50%, rgba(14,165,233,0.06) 0%, transparent 70%)',
         pointerEvents: 'none'
       }} />
 
@@ -174,8 +146,7 @@ export default function Login() {
           <div style={{
             width: 48, height: 48, borderRadius: 12, margin: '0 auto 12px',
             background: 'linear-gradient(135deg, #0ea5e9, #14b8a6)',
-            display: 'flex', alignItems: 'center', justifyContent: 'center',
-            fontSize: 24
+            display: 'flex', alignItems: 'center', justifyContent: 'center'
           }}>
             <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/>
