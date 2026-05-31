@@ -10,7 +10,6 @@ export default function Login() {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const [isSignUp, setIsSignUp] = useState(false);
-  const [confirmationSent, setConfirmationSent] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const router = useRouter();
 
@@ -27,9 +26,7 @@ export default function Login() {
     setError('');
     const { error } = await supabase.auth.signInWithOAuth({
       provider: 'google',
-      options: {
-        redirectTo: `https://project-ilsfa.vercel.app/dashboard`,
-      },
+      options: { redirectTo: 'https://project-ilsfa.vercel.app/dashboard' },
     });
     if (error) setError(error.message);
     setLoading(false);
@@ -45,7 +42,7 @@ export default function Login() {
       email,
       password,
       options: {
-        emailRedirectTo: `https://project-ilsfa.vercel.app/dashboard`,
+        emailRedirectTo: 'https://project-ilsfa.vercel.app/dashboard',
         data: { name, full_name: name }
       }
     });
@@ -55,7 +52,7 @@ export default function Login() {
         name,
         created_at: new Date().toISOString()
       });
-      setConfirmationSent(true);
+      router.push('/dashboard');
     }
     if (error) setError(error.message);
     setLoading(false);
@@ -95,22 +92,6 @@ export default function Login() {
     }
     setLoading(false);
   };
-
-  if (confirmationSent) {
-    return (
-      <div style={{ minHeight: '100vh', background: '#0f172a', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: 'sans-serif' }}>
-        <div style={{ background: '#1e293b', padding: 40, borderRadius: 24, width: 400, textAlign: 'center', border: '1px solid #334155' }}>
-          <div style={{ fontSize: 48, marginBottom: 16 }}>📧</div>
-          <h2 style={{ color: 'white', marginBottom: 8 }}>Check your email</h2>
-          <p style={{ color: '#94a3b8', marginBottom: 16 }}>We sent a confirmation link to <strong>{email}</strong></p>
-          <button onClick={() => { setConfirmationSent(false); setEmail(''); setPassword(''); setName(''); }}
-            style={{ background: '#14b8a6', border: 'none', padding: '10px 20px', borderRadius: 8, color: 'white', cursor: 'pointer' }}>
-            Back to login
-          </button>
-        </div>
-      </div>
-    );
-  }
 
   return (
     <main style={{ minHeight: '100vh', background: 'linear-gradient(135deg, #0f172a 0%, #0a0f1a 100%)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: 'system-ui, -apple-system, sans-serif' }}>
