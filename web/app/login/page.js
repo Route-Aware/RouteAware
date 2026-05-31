@@ -22,6 +22,19 @@ export default function Login() {
 
   const isValidEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
+  const handleGoogleLogin = async () => {
+    setLoading(true);
+    setError('');
+    const { error } = await supabase.auth.signInWithOAuth({
+      provider: 'google',
+      options: {
+        redirectTo: `https://project-ilsfa.vercel.app/dashboard`,
+      },
+    });
+    if (error) setError(error.message);
+    setLoading(false);
+  };
+
   const handleSignup = async () => {
     setError('');
     if (!name.trim()) return setError('Please enter your name');
@@ -151,6 +164,11 @@ export default function Login() {
           {loading ? 'Loading...' : (isSignUp ? 'Create Account' : 'Sign In')}
         </button>
 
+        <button onClick={handleGoogleLogin} disabled={loading}
+          style={{ width: '100%', padding: 14, borderRadius: 40, background: 'white', border: 'none', color: '#0f172a', fontWeight: 600, fontSize: 14, cursor: loading ? 'not-allowed' : 'pointer', marginBottom: 12, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8 }}>
+          <span>🌐</span> Continue with Google
+        </button>
+
         <button onClick={handleDemoLogin} disabled={loading}
           style={{ width: '100%', padding: 14, borderRadius: 40, background: 'transparent', border: '1px solid #334155', color: '#94a3b8', cursor: 'pointer', marginBottom: 20 }}>
           🎯 Try Demo Account
@@ -167,7 +185,3 @@ export default function Login() {
     </main>
   );
 }
-
-
-
-
