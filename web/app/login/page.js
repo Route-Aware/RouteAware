@@ -111,7 +111,7 @@ export default function Login() {
         backgroundImage: `url("https://tile.openstreetmap.org/5/42/26.png")`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
-        opacity: 100%,
+        opacity: 100,
         //filter: 'invert(1) hue-rotate(180deg) saturate(2) brightness(0.5)',
         pointerEvents: 'none',
         transform: 'scale(1.05)'
